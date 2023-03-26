@@ -12,6 +12,9 @@ const gi9 = document.querySelector(".gi9");
 //other query selectors
 const winner = document.querySelector(".winner");
 const button = document.querySelector(".reset-btn");
+const turn = document.querySelector(".turn");
+const p1 = document.querySelector(".p1");
+const p2 = document.querySelector(".p2");
 
 //rows for win condition
 rowX = "XXX";
@@ -221,6 +224,27 @@ button.addEventListener("click", function() {
     resetGame();
 })
 
+let p1Selected = false;
+let p2Selected = false;
+
+p1.addEventListener("click", function() {
+    p1.style.backgroundColor = "green";
+    p2.style.backgroundColor = "white";
+    p1Selected = true;
+    p2Selected = false;
+    player1Turn = true;
+    player2Turn = false;
+})
+
+p2.addEventListener("click", function() {
+    p2.style.backgroundColor = "green";
+    p1.style.backgroundColor = "white";
+    p2Selected = true;
+    p1Selected = false;
+    player2Turn = true;
+    player1Turn = false;
+})
+
 function winCondition() {
     //rows gi's for X and O
     rowgi1 = gi1.textContent + gi2.textContent + gi3.textContent;
@@ -239,6 +263,9 @@ function winCondition() {
         player2wins = true;
         player1wins = false;
         return winner.textContent += " Player2 wins!";
+    } else if(gi1.textContent !== "" && gi2.textContent !== "" && gi3.textContent !== "" && gi4.textContent !== "" && gi5.textContent !== "" && gi6.textContent !== ""
+    && gi7.textContent !== "" && gi8.textContent !== "" && gi9.textContent !== "" && player1wins === false && player2wins === false) {
+        return winner.textContent += " Nobody wins...Consider restarting?";
     }
 }
 
@@ -256,4 +283,14 @@ function resetGame() {
     winner.textContent = "Winner:";
     player1wins = false;
     player2wins = false;
+    if(p1Selected === true && p2Selected === false) {
+        player1Turn = true;
+        player2Turn = false;
+    } else if (p2Selected === true && p1Selected === false) {
+        player1Turn = false;
+        player2Turn = true;
+    } else if(p1Selected === false && p2Selected === false){
+        player1Turn = true;
+        player2Turn = false;
+    }
 }

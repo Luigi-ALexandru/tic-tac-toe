@@ -11,6 +11,13 @@
     font-weight: bold;
 }
 
+.turn {
+    text-align: center;
+    margin-top: 2rem;
+    font-size: 2rem;
+    font-weight: bold;
+}
+
 .reset-btn {
     text-align: center;
     display: block;
